@@ -92,6 +92,11 @@ class Vacancy(CleanTagsMixin):
                 f"Требования: {self.requirement} \n"
                 f"Обязанности: {self.responsibility}")
 
+    def __repr__(self):
+        return (f"{self.__class__.__name__}(vacancy_id='{self.__vacancy_id}', name='{self.__name}', url='{self.__url}', "
+                f"employer_id='{self.__employer_id}', salary_from={self.__salary_from}, "
+                f"salary_to={self.__salary_to}, currency='{self.__currency}')")
+
     def __lt__(self, other):
         # сравниваем верхний порог зарплат при наличии
         if self.salary_to and other.salary_to:
