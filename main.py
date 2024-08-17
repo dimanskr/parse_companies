@@ -8,7 +8,7 @@ from src.utils import salary_to_str
 def download_data_from_api_to_db(db):
     """
     Функция загрузки данных с API и сохранение их в базу данных
-    :param db: уккзатель на БД
+    :param db: указатель на БД
     """
 
     # создаем объект парсера вакансий с HH.ru

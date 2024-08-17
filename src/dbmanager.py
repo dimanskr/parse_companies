@@ -236,7 +236,7 @@ class DBManager(AbstractDBManager):
     def get_vacancies_with_keyword(self, keyword: str) -> list[tuple]:
         """
         Получает список всех вакансий, в названии которых содержатся переданные в метод слова, например, python.
-        :param keyword (str): переданное в запрос слово
+        :param keyword: (str) переданное в запрос слово
         :return: list[tuple]: список всех вакансий, в названии которых содержатся переданные в метод слова.
         """
         with self.__conn.cursor() as cur:
@@ -253,3 +253,32 @@ class DBManager(AbstractDBManager):
         self.__conn.commit()
 
         return vacancies_data
+
+    def drop_database(self):
+        """
+        Удаляет базу данных, если она существует.
+        """
+        # Закрываем текущее соединение
+        self.__conn.close()
+
+        # Создаем новое соединение с базой данных postgres
+        self.__conn = psycopg2.connect(dbname="postgres", user=self.__user,
+                                       password=self.__password, host=self.__host, port=self.__port)
+        self.__conn.autocommit = True
+        cursor = self.__conn.cursor()
+
+        # Закрываем все активные соединения с удаляемой базой данных
+        cursor.execute(f"""
+            SELECT pg_terminate_backend(pg_stat_activity.pid)
+            FROM pg_stat_activity
+            WHERE pg_stat_activity.datname = '{self.__dbname}'
+              AND pid <> pg_backend_pid();
+        """)
+
+        # Удаляем базу данных
+        cursor.execute(f"""DROP DATABASE IF EXISTS {self.__dbname};""")
+
+        # Закрываем курсор и соединение
+        cursor.close()
+        self.__conn.close()
+

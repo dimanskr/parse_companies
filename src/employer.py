@@ -57,6 +57,13 @@ class Employer:
                 f"Кол-во вакансий {self.__open_vacancies}\n"
                 f"Ссылка на вакансии компании: {self.__alternate_url}\n")
 
+    def __repr__(self):
+        return (
+            f"{self.__class__.__name__}(employer_id='{self.__employer_id}', name='{self.__name}', "
+            f"alternate_url='{self.__alternate_url}', "
+            f"city='{self.__city}', description='{self.__description}', site_url='{self.__site_url}', "
+            f"vacancies_url='{self.__vacancies_url}', open_vacancies={self.__open_vacancies})")
+
     @classmethod
     def new_employer(cls, data: dict) -> 'Employer':
         """
