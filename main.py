@@ -51,7 +51,6 @@ def user_interaction():
 
     # создаем подключение к БД таблицы
     db = DBManager(**db_config)
-    db.create_database()
     db.create_table()
 
     # если таблицы пустые, загружаем данные с API
