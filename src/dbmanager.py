@@ -39,7 +39,7 @@ class DBManager(AbstractDBManager):
         self.__port = port
         self.__conn = psycopg2.connect(dbname='postgres', user=user, password=password,
                                        host=host, port=port)
-        self.create_table()
+        self.create_database()
 
     def create_database(self):
         # Подключение к существующей базе данных, например, postgres
