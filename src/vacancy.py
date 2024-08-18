@@ -93,8 +93,9 @@ class Vacancy(CleanTagsMixin):
                 f"Обязанности: {self.responsibility}")
 
     def __repr__(self):
-        return (f"{self.__class__.__name__}(vacancy_id='{self.__vacancy_id}', name='{self.__name}', url='{self.__url}', "
-                f"employer_id='{self.__employer_id}', salary_from={self.__salary_from}, "
+        return (f"{self.__class__.__name__}(vacancy_id='{self.__vacancy_id}', name='{self.__name}', "
+                f"url='{self.__url}', employer_id='{self.__employer_id}', requirement='{self.__requirement}', "
+                f"responsibility='{self.__responsibility}', salary_from={self.__salary_from}, "
                 f"salary_to={self.__salary_to}, currency='{self.__currency}')")
 
     def __lt__(self, other):
