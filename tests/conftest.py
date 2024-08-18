@@ -75,6 +75,21 @@ def employer_instance():
     return employer
 
 
+@pytest.fixture
+def real_employer():
+    employer = Employer(
+        employer_id='78638',
+        name='Т-Банк',
+        alternate_url='https://hh.ru/employer/78638',
+        city='Москва',
+        description='<p>Тинькофф теперь Т-Банк.<br />Буква «Т» становится узнаваемым визуальным элементом...</p>',
+        site_url='https://l.tinkoff.ru/career.and.vacancies',
+        vacancies_url='https://api.hh.ru/vacancies?employer_id=78638&locale=RU',
+        open_vacancies=17108
+    )
+    return employer
+
+
 @pytest.fixture(scope="module")
 def db_manager():
     db = DBManager(dbname="test_db", user="postgres", password="postgres", host="localhost", port=5432)

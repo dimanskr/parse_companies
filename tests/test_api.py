@@ -1,4 +1,4 @@
-from src.api import HH
+from src.vacancy import Vacancy
 
 
 def test_hh_init(hh_instance):
@@ -14,3 +14,7 @@ def test_load_employers_id_name(hh_instance):
     assert employers_list[0]['id'] == "78638"
     assert employers_list[0]['name'] == "Т-Банк"
 
+
+def test_load_vacancies_return_vacancies_instances(hh_instance, real_employer):
+    real_vacancies_list = hh_instance.load_vacancies([real_employer])
+    assert all(isinstance(vacancy, Vacancy) for vacancy in real_vacancies_list)
